@@ -5,15 +5,48 @@
     <meta charset="UTF-8">
     <title>CSC 444 Assignment 2</title>
 </head>
-<body>
+<body onload="plotPoints(300,300,50,350)">
     <h1>Anscombe's Quartet: Experiment 2</h1>
     <div id="image">
-        <svg width="400" height="400">
+        <svg width="400" height="400" id="svg">
             <line x1="50" y1="50" x2="50" y2="350" stroke="black"/>
             <line x1="50" y1="350" x2="350" y2="350" stroke="black"/>
             <text x="25" y="200">Y</text>
             <text x="200" y="375">X</text>
+            <!--circle cx="70" cy="70.13" r="3" stroke="black"/-->
         </svg>
     </div>
+
+    <script>
+        let svg = document.getElementById("svg");
+
+        function plotPoints(xLength, yLength, xi, yi){
+            let x = [10,8,13,9,11,14,6,4,12,7,5]
+            let y = [9.14, 8.14, 8.74, 8.77, 9.26, 8.1, 6.13, 3.1, 9.13, 7.26, 4.74]
+
+            //svg.innerHTML+="<circle cx='70' cy='70' r='3'/>"
+
+            let xmax = 0;
+            let ymax = 0;
+
+            for(let i =0; i < x.length; i++){
+                if(x[i] > xmax)
+                    xmax = x[i];
+
+                if(y[i] > ymax)
+                    ymax = y[i];
+            }
+
+            xunit = xLength/xmax;
+            yunit = yLength/ymax;
+
+            for(let i = 0; i < x.length; i++){
+                xt = (x[i] * xunit) + xi;
+                yt = yi - (y[i] * yunit);
+
+                svg.innerHTML+="<circle cx='"+xt+"' cy='"+yt+"' r='3'/>"
+            }
+        }
+    </script>
 </body>
 </html>
