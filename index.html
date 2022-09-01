@@ -9,10 +9,12 @@
     <h1>Anscombe's Quartet: Experiment 2</h1>
     <div id="image">
         <svg width="400" height="400" id="svg">
-            <line x1="50" y1="50" x2="50" y2="350" stroke="black"/>
+            <!--Hardcoded this to for first time-->
+            <line x1="50" y1="25" x2="50" y2="350" stroke="black"/>
             <line x1="50" y1="350" x2="350" y2="350" stroke="black"/>
-            <text x="25" y="200">Y</text>
-            <text x="200" y="375">X</text>
+            <text x="10" y="200">Y</text>
+            <text x="200" y="390">X</text>
+            <text x="40" y="360">0</text>
             <!--circle cx="70" cy="70.13" r="3" stroke="black"/-->
         </svg>
     </div>
@@ -39,6 +41,22 @@
 
             xunit = xLength/xmax;
             yunit = yLength/ymax;
+
+            for(let i = 1; i <= xmax; i++){
+                xt = (i * xunit) + xi;
+                y1 = yi+5;
+                y2 = yi-5;
+                svg.innerHTML+="<line x1='"+xt+"' y1='"+y1+"' x2='"+xt+"' y2='"+y2+"' stroke='black'/>";
+                svg.innerHTML+="<text x='"+(xt-7)+"' y='"+(y1+15)+"'>"+i+"</text>";
+            }
+
+            for(let i = 1; i <= Math.ceil(ymax); i++){
+                yt = yi - (i * yunit);
+                x1 = xi+5;
+                x2 = xi-5;
+                svg.innerHTML+="<line x1='"+x1+"' y1='"+yt+"' x2='"+x2+"' y2='"+yt+"' stroke='black'/>";
+                svg.innerHTML+="<text x='"+(x2-15)+"' y='"+(yt+5)+"'>"+i+"</text>"
+            }
 
             for(let i = 0; i < x.length; i++){
                 xt = (x[i] * xunit) + xi;
